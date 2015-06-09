@@ -9,13 +9,14 @@
 /* Begin PBXBuildFile section */
 		2E76742D1B26766200336867 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E76742C1B26766200336867 /* main.m */; };
 		2E7674301B26766200336867 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E76742F1B26766200336867 /* AppDelegate.m */; };
-		2E7674331B26766200336867 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E7674321B26766200336867 /* ViewController.m */; };
 		2E7674361B26766200336867 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E7674341B26766200336867 /* Main.storyboard */; };
 		2E7674381B26766200336867 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2E7674371B26766200336867 /* Images.xcassets */; };
 		2E76743B1B26766200336867 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2E7674391B26766200336867 /* LaunchScreen.xib */; };
 		2E7674471B26766200336867 /* spotify_artist_viewerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E7674461B26766200336867 /* spotify_artist_viewerTests.m */; };
 		2E7674541B2676F400336867 /* SAArtist.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E7674531B2676F400336867 /* SAArtist.m */; };
 		2E7674571B26772600336867 /* SARequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E7674561B26772600336867 /* SARequestManager.m */; };
+		52F5B4201B275B22000D6F01 /* SAArtistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F5B41F1B275B22000D6F01 /* SAArtistViewController.m */; };
+		52F5B4231B275C17000D6F01 /* SASearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F5B4221B275C17000D6F01 /* SASearchViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,8 +35,6 @@
 		2E76742C1B26766200336867 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2E76742E1B26766200336867 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		2E76742F1B26766200336867 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		2E7674311B26766200336867 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		2E7674321B26766200336867 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		2E7674351B26766200336867 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2E7674371B26766200336867 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		2E76743A1B26766200336867 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -46,6 +45,10 @@
 		2E7674531B2676F400336867 /* SAArtist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SAArtist.m; path = Models/SAArtist.m; sourceTree = "<group>"; };
 		2E7674551B26772600336867 /* SARequestManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SARequestManager.h; path = Networking/SARequestManager.h; sourceTree = "<group>"; };
 		2E7674561B26772600336867 /* SARequestManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SARequestManager.m; path = Networking/SARequestManager.m; sourceTree = "<group>"; };
+		52F5B41E1B275B22000D6F01 /* SAArtistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAArtistViewController.h; sourceTree = "<group>"; };
+		52F5B41F1B275B22000D6F01 /* SAArtistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAArtistViewController.m; sourceTree = "<group>"; };
+		52F5B4211B275C17000D6F01 /* SASearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASearchViewController.h; sourceTree = "<group>"; };
+		52F5B4221B275C17000D6F01 /* SASearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASearchViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,8 +94,10 @@
 				2E7674511B2676D400336867 /* Networking */,
 				2E76742E1B26766200336867 /* AppDelegate.h */,
 				2E76742F1B26766200336867 /* AppDelegate.m */,
-				2E7674311B26766200336867 /* ViewController.h */,
-				2E7674321B26766200336867 /* ViewController.m */,
+				52F5B41E1B275B22000D6F01 /* SAArtistViewController.h */,
+				52F5B41F1B275B22000D6F01 /* SAArtistViewController.m */,
+				52F5B4211B275C17000D6F01 /* SASearchViewController.h */,
+				52F5B4221B275C17000D6F01 /* SASearchViewController.m */,
 				2E7674341B26766200336867 /* Main.storyboard */,
 				2E7674371B26766200336867 /* Images.xcassets */,
 				2E7674391B26766200336867 /* LaunchScreen.xib */,
@@ -246,7 +251,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				2E7674541B2676F400336867 /* SAArtist.m in Sources */,
-				2E7674331B26766200336867 /* ViewController.m in Sources */,
+				52F5B4231B275C17000D6F01 /* SASearchViewController.m in Sources */,
+				52F5B4201B275B22000D6F01 /* SAArtistViewController.m in Sources */,
 				2E7674301B26766200336867 /* AppDelegate.m in Sources */,
 				2E76742D1B26766200336867 /* main.m in Sources */,
 				2E7674571B26772600336867 /* SARequestManager.m in Sources */,
@@ -446,6 +452,7 @@
 				2E76744C1B26766200336867 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2E76744D1B26766200336867 /* Build configuration list for PBXNativeTarget "spotify-artist-viewerTests" */ = {
 			isa = XCConfigurationList;
@@ -454,6 +461,7 @@
 				2E76744F1B26766200336867 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
