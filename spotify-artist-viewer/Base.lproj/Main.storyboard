@@ -2,6 +2,8 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D2134" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Search View Controller-->
@@ -15,11 +17,76 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="ZdT-jR-GL6">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="tLL-ZZ-kIH">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tLL-ZZ-kIH" id="y9t-Gy-WXS">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <searchBar contentMode="redraw" placeholder="Search Spotify Artists" translatesAutoresizingMaskIntoConstraints="NO" id="wPy-bh-vlo">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="wPy-bh-vlo" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="8im-Z8-ezS"/>
+                            <constraint firstItem="ZdT-jR-GL6" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-16" id="AxM-m7-D6s"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ZdT-jR-GL6" secondAttribute="trailing" constant="-16" id="H3d-Fc-KQ8"/>
+                            <constraint firstItem="ZdT-jR-GL6" firstAttribute="top" secondItem="wPy-bh-vlo" secondAttribute="bottom" id="MRI-Hg-7b3"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="ZdT-jR-GL6" secondAttribute="bottom" constant="187" id="SQz-xG-AaI">
+                                <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                            </constraint>
+                            <constraint firstAttribute="trailingMargin" secondItem="wPy-bh-vlo" secondAttribute="trailing" constant="-16" id="ePO-kS-fkS"/>
+                            <constraint firstItem="wPy-bh-vlo" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-16" id="ev4-Xi-TfG"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="ZdT-jR-GL6"/>
+                                <exclude reference="wPy-bh-vlo"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="SQz-xG-AaI"/>
+                                <exclude reference="8im-Z8-ezS"/>
+                                <exclude reference="ePO-kS-fkS"/>
+                                <exclude reference="ev4-Xi-TfG"/>
+                                <exclude reference="AxM-m7-D6s"/>
+                                <exclude reference="H3d-Fc-KQ8"/>
+                                <exclude reference="MRI-Hg-7b3"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="ZdT-jR-GL6"/>
+                                <include reference="wPy-bh-vlo"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="SQz-xG-AaI"/>
+                                <include reference="8im-Z8-ezS"/>
+                                <include reference="ePO-kS-fkS"/>
+                                <include reference="ev4-Xi-TfG"/>
+                                <include reference="AxM-m7-D6s"/>
+                                <include reference="H3d-Fc-KQ8"/>
+                                <include reference="MRI-Hg-7b3"/>
+                            </mask>
+                        </variation>
                     </view>
+                    <navigationItem key="navigationItem" id="LKQ-0X-zfz"/>
+                    <connections>
+                        <outlet property="resultsTableView" destination="ZdT-jR-GL6" id="Qtb-FC-FeG"/>
+                        <outlet property="searchBar" destination="wPy-bh-vlo" id="nMb-oY-GTg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="1141.5" y="406.5"/>
         </scene>
     </scenes>
 </document>

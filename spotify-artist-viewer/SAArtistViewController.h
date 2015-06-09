@@ -7,11 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@class SAArtist;
+#import "SAArtist.h"
 
 @interface SAArtistViewController : UIViewController
 
--(instancetype)initWithArtist:(SAArtist *)artist;
+- (instancetype)initWithArtist:(SAArtist *)artist;
 
 @end

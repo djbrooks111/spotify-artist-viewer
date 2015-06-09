@@ -17,6 +17,7 @@
 		2E7674571B26772600336867 /* SARequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E7674561B26772600336867 /* SARequestManager.m */; };
 		52F5B4201B275B22000D6F01 /* SAArtistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F5B41F1B275B22000D6F01 /* SAArtistViewController.m */; };
 		52F5B4231B275C17000D6F01 /* SASearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F5B4221B275C17000D6F01 /* SASearchViewController.m */; };
+		52F5B4251B27846A000D6F01 /* SAArtistView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52F5B4241B27846A000D6F01 /* SAArtistView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		52F5B41F1B275B22000D6F01 /* SAArtistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAArtistViewController.m; sourceTree = "<group>"; };
 		52F5B4211B275C17000D6F01 /* SASearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASearchViewController.h; sourceTree = "<group>"; };
 		52F5B4221B275C17000D6F01 /* SASearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASearchViewController.m; sourceTree = "<group>"; };
+		52F5B4241B27846A000D6F01 /* SAArtistView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SAArtistView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 				2E76742F1B26766200336867 /* AppDelegate.m */,
 				52F5B41E1B275B22000D6F01 /* SAArtistViewController.h */,
 				52F5B41F1B275B22000D6F01 /* SAArtistViewController.m */,
+				52F5B4241B27846A000D6F01 /* SAArtistView.xib */,
 				52F5B4211B275C17000D6F01 /* SASearchViewController.h */,
 				52F5B4221B275C17000D6F01 /* SASearchViewController.m */,
 				2E7674341B26766200336867 /* Main.storyboard */,
@@ -233,6 +236,7 @@
 				2E7674361B26766200336867 /* Main.storyboard in Resources */,
 				2E76743B1B26766200336867 /* LaunchScreen.xib in Resources */,
 				2E7674381B26766200336867 /* Images.xcassets in Resources */,
+				52F5B4251B27846A000D6F01 /* SAArtistView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
