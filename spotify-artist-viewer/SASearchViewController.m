@@ -9,6 +9,7 @@
 #import "SASearchViewController.h"
 #import "SARequestManager.h"
 #import "SAArtistViewController.h"
+#import "SASearchResult.h"
 @class SAArtist;
 
 @interface SASearchViewController () <UISearchBarDelegate,  UITableViewDelegate, UITableViewDataSource>
@@ -73,8 +74,25 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
-    NSDictionary *artistDictionary = [self.resultsArray objectAtIndex:indexPath.row];
-    cell.textLabel.text = [artistDictionary objectForKey:@"name"];
+    SASearchResult *searchResult = [self.resultsArray objectAtIndex:indexPath.row];
+    cell.textLabel.text = searchResult.name;
+    switch (searchResult.resultType) {
+        case SearchResultAlbum: {
+            cell.detailTextLabel.text = @"Album";
+            break;
+        }
+        case SearchResultArtist: {
+            cell.detailTextLabel.text = @"Artist";
+            break;
+        }
+        case SearchResultTrack: {
+            cell.detailTextLabel.text = @"Track";
+            break;
+        }
+        default: {
+            break;
+        }
+    }
     
     return cell;
 }
@@ -91,7 +109,7 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         self.searchBar.text = @"";
         self.resultsArray = nil;
-        SAArtistViewController *vc = [[SAArtistViewController alloc] initWithArtist:artist];
+        SAArtistViewController *vc = [[SAArtistViewController alloc] initWithItem:artist];
         [self presentViewController:vc animated:YES completion:nil];
     });
 }
@@ -99,11 +117,14 @@
 #pragma mark - UISearchBarDelegate
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    NSString *query = [NSString stringWithFormat:@"https://api.spotify.com/v1/search?q=%@*&type=artist", [searchText stringByReplacingOccurrencesOfString:@" " withString:@"%20"]];
-    [self.requestManager getArtistsWithQuery:query success:^(NSArray *artists) {
-        self.resultsArray = artists;
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    NSString *query = [NSString stringWithFormat:@"https://api.spotify.com/v1/search?q=%@*&type=artist,album,track&limit=10", [searchText stringByReplacingOccurrencesOfString:@" " withString:@"+"]];
+    [self.requestManager executeQuery:query success:^(NSArray *searchResults) {
+        NSLog(@"results set");
+        self.resultsArray = searchResults;
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     } failure:^(NSError *error) {
-        NSLog(@"Failed to fetch %@: %@", query, error);
+        NSLog(@"Failed to execute %@: %@", query, error);
     }];
 }
 

@@ -20,4 +20,6 @@
                              success:(void (^)(SAArtist *artist))success
                              failure:(void (^)(NSError *error))failure;
 
+- (void)executeQuery:(NSString *)query success:(void (^)(NSArray *searchResults))success failure:(void (^)(NSError *error))failure;
+
 @end

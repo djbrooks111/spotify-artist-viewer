@@ -9,10 +9,10 @@
 
 @implementation SAArtist
 
-- (instancetype)initWithName:(NSString *)name image:(UIImage *)image andBio:(NSString *)bio {
+- (instancetype)initWithName:(NSString *)name imageUrl:(NSString *)imageUrl andBio:(NSString *)bio {
     if (self == [super init]) {
         self.name = name;
-        self.image = image;
+        self.imageUrl = imageUrl;
         self.bio = bio;
     }
     return self;

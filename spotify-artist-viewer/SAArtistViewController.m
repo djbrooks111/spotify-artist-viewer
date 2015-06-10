@@ -7,12 +7,16 @@
 //
 
 #import "SAArtistViewController.h"
+#import "SAArtist.h"
+#import "SAAlbum.h"
+#import "SATrack.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface SAArtistViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *artistNameLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *artistImageView;
 @property (weak, nonatomic) IBOutlet UITextView *bioTextView;
-@property (nonatomic) SAArtist *artist;
+@property (strong, nonatomic) id item;
 
 @end
 
@@ -21,11 +25,28 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.artistNameLabel.text = self.artist.name;
-    self.artistImageView.image = self.artist.image;
-    self.artistImageView.layer.cornerRadius = self.artistImageView.frame.size.width / 3.0;
+    if ([self.item isKindOfClass:[SAArtist class]]) {
+        // item is an artist
+        SAArtist *artist = (SAArtist *)self.item;
+        self.artistNameLabel.text = artist.name;
+        [self.artistImageView sd_setImageWithURL:[NSURL URLWithString:artist.imageUrl]];
+        self.bioTextView.text = artist.bio;
+    } else if ([self.item isKindOfClass:[SAAlbum class]]) {
+        // item is an album
+        SAAlbum *album = (SAAlbum *)self.item;
+        self.artistNameLabel.text = album.name;
+        [self.artistImageView sd_setImageWithURL:[NSURL URLWithString:album.imageUrl]];
+        NSString *marketString = [album.availableMarkets componentsJoinedByString:@"\n- "];
+        self.bioTextView.text = [NSString stringWithFormat:@"This album is availble in the following markets:\n- %@", marketString];
+    } else if ([self.item isKindOfClass:[SATrack class]]) {
+        // item is a track
+        SATrack *track = (SATrack *)self.item;
+        self.artistNameLabel.text = track.name;
+        [self.artistImageView sd_setImageWithURL:[NSURL URLWithString:track.imageUrl]];
+        self.bioTextView.text = [NSString stringWithFormat:@"Artist: %@", track.artist];
+    }
+    self.artistImageView.layer.cornerRadius = self.artistImageView.frame.size.width / 2.0;
     self.artistImageView.layer.masksToBounds = YES;
-    self.bioTextView.text = self.artist.bio;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -33,11 +54,11 @@
     // Dispose of any resources that can be recreated.
 }
 
--(instancetype)initWithArtist:(SAArtist *)artist {
-    if (self == [super init]) {
-        self.artist = artist;
+- (instancetype)initWithItem:(id)item {
+    self = [super init];
+    if (self) {
+        self.item = item;
     }
-    
     return self;
 }
 

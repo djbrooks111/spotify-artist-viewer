@@ -15,9 +15,13 @@
 		2E7674471B26766200336867 /* spotify_artist_viewerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E7674461B26766200336867 /* spotify_artist_viewerTests.m */; };
 		2E7674541B2676F400336867 /* SAArtist.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E7674531B2676F400336867 /* SAArtist.m */; };
 		2E7674571B26772600336867 /* SARequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E7674561B26772600336867 /* SARequestManager.m */; };
+		525A7C621B28C055004B393D /* SASearchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 525A7C611B28C055004B393D /* SASearchResult.m */; };
+		525A7C681B28CE2D004B393D /* SAAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 525A7C671B28CE2D004B393D /* SAAlbum.m */; };
+		525A7C6B1B28D341004B393D /* SATrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 525A7C6A1B28D341004B393D /* SATrack.m */; };
 		52F5B4201B275B22000D6F01 /* SAArtistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F5B41F1B275B22000D6F01 /* SAArtistViewController.m */; };
 		52F5B4231B275C17000D6F01 /* SASearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F5B4221B275C17000D6F01 /* SASearchViewController.m */; };
 		52F5B4251B27846A000D6F01 /* SAArtistView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52F5B4241B27846A000D6F01 /* SAArtistView.xib */; };
+		89875CA94459570A2D577C7F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2F8575B96E49D8D4523370A /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,11 +50,20 @@
 		2E7674531B2676F400336867 /* SAArtist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SAArtist.m; path = Models/SAArtist.m; sourceTree = "<group>"; };
 		2E7674551B26772600336867 /* SARequestManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SARequestManager.h; path = Networking/SARequestManager.h; sourceTree = "<group>"; };
 		2E7674561B26772600336867 /* SARequestManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SARequestManager.m; path = Networking/SARequestManager.m; sourceTree = "<group>"; };
+		525A7C601B28C055004B393D /* SASearchResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SASearchResult.h; path = Models/SASearchResult.h; sourceTree = "<group>"; };
+		525A7C611B28C055004B393D /* SASearchResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SASearchResult.m; path = Models/SASearchResult.m; sourceTree = "<group>"; };
+		525A7C661B28CE2D004B393D /* SAAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SAAlbum.h; path = Models/SAAlbum.h; sourceTree = "<group>"; };
+		525A7C671B28CE2D004B393D /* SAAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SAAlbum.m; path = Models/SAAlbum.m; sourceTree = "<group>"; };
+		525A7C691B28D341004B393D /* SATrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SATrack.h; path = Models/SATrack.h; sourceTree = "<group>"; };
+		525A7C6A1B28D341004B393D /* SATrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SATrack.m; path = Models/SATrack.m; sourceTree = "<group>"; };
 		52F5B41E1B275B22000D6F01 /* SAArtistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAArtistViewController.h; sourceTree = "<group>"; };
 		52F5B41F1B275B22000D6F01 /* SAArtistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAArtistViewController.m; sourceTree = "<group>"; };
 		52F5B4211B275C17000D6F01 /* SASearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASearchViewController.h; sourceTree = "<group>"; };
 		52F5B4221B275C17000D6F01 /* SASearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASearchViewController.m; sourceTree = "<group>"; };
 		52F5B4241B27846A000D6F01 /* SAArtistView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SAArtistView.xib; sourceTree = "<group>"; };
+		AF2B30D65B38FB7175E29F20 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		B2F8575B96E49D8D4523370A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA324F71DC6F38C2325F17DF /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89875CA94459570A2D577C7F /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,12 +85,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		09D7002732A947FFD56994F7 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				AF2B30D65B38FB7175E29F20 /* Pods.debug.xcconfig */,
+				DA324F71DC6F38C2325F17DF /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		2E76741E1B26766200336867 = {
 			isa = PBXGroup;
 			children = (
 				2E7674291B26766200336867 /* spotify-artist-viewer */,
 				2E7674431B26766200336867 /* spotify-artist-viewerTests */,
 				2E7674281B26766200336867 /* Products */,
+				09D7002732A947FFD56994F7 /* Pods */,
+				5775F6AB377766EFE37822D2 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -140,6 +165,12 @@
 			children = (
 				2E7674521B2676F400336867 /* SAArtist.h */,
 				2E7674531B2676F400336867 /* SAArtist.m */,
+				525A7C661B28CE2D004B393D /* SAAlbum.h */,
+				525A7C671B28CE2D004B393D /* SAAlbum.m */,
+				525A7C691B28D341004B393D /* SATrack.h */,
+				525A7C6A1B28D341004B393D /* SATrack.m */,
+				525A7C601B28C055004B393D /* SASearchResult.h */,
+				525A7C611B28C055004B393D /* SASearchResult.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -153,6 +184,14 @@
 			name = Networking;
 			sourceTree = "<group>";
 		};
+		5775F6AB377766EFE37822D2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B2F8575B96E49D8D4523370A /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -160,9 +199,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2E76744A1B26766200336867 /* Build configuration list for PBXNativeTarget "spotify-artist-viewer" */;
 			buildPhases = (
+				AAACA36432C6C1390025DF6A /* Check Pods Manifest.lock */,
 				2E7674231B26766200336867 /* Sources */,
 				2E7674241B26766200336867 /* Frameworks */,
 				2E7674251B26766200336867 /* Resources */,
+				95E30D2D5DF566A62DD4C9B0 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -249,16 +290,52 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		95E30D2D5DF566A62DD4C9B0 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AAACA36432C6C1390025DF6A /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		2E7674231B26766200336867 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				2E7674541B2676F400336867 /* SAArtist.m in Sources */,
+				525A7C681B28CE2D004B393D /* SAAlbum.m in Sources */,
 				52F5B4231B275C17000D6F01 /* SASearchViewController.m in Sources */,
 				52F5B4201B275B22000D6F01 /* SAArtistViewController.m in Sources */,
+				525A7C6B1B28D341004B393D /* SATrack.m in Sources */,
 				2E7674301B26766200336867 /* AppDelegate.m in Sources */,
 				2E76742D1B26766200336867 /* main.m in Sources */,
+				525A7C621B28C055004B393D /* SASearchResult.m in Sources */,
 				2E7674571B26772600336867 /* SARequestManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -385,6 +462,7 @@
 		};
 		2E76744B1B26766200336867 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AF2B30D65B38FB7175E29F20 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "spotify-artist-viewer/Info.plist";
@@ -395,6 +473,7 @@
 		};
 		2E76744C1B26766200336867 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DA324F71DC6F38C2325F17DF /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "spotify-artist-viewer/Info.plist";
