@@ -18,69 +18,96 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="ZdT-jR-GL6">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="tLL-ZZ-kIH">
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tLL-ZZ-kIH" id="y9t-Gy-WXS">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
-                            </tableView>
                             <searchBar contentMode="redraw" placeholder="Search Spotify Artists" translatesAutoresizingMaskIntoConstraints="NO" id="wPy-bh-vlo">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="AHx-64-g8v">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="5bJ-mL-bco">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="DQJ-mc-QE9">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" tag="100" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ffo-gj-MZO">
+                                                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                                        <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                                                    </variation>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <size key="customSize" width="60" height="60"/>
+                                        <variation key="default">
+                                            <mask key="subviews">
+                                                <exclude reference="ffo-gj-MZO"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="heightClass=regular-widthClass=compact">
+                                            <mask key="subviews">
+                                                <include reference="ffo-gj-MZO"/>
+                                            </mask>
+                                        </variation>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="AHx-64-g8v" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-16" id="0rZ-ci-Rrh"/>
                             <constraint firstItem="wPy-bh-vlo" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="8im-Z8-ezS"/>
-                            <constraint firstItem="ZdT-jR-GL6" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-16" id="AxM-m7-D6s"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="ZdT-jR-GL6" secondAttribute="trailing" constant="-16" id="H3d-Fc-KQ8"/>
-                            <constraint firstItem="ZdT-jR-GL6" firstAttribute="top" secondItem="wPy-bh-vlo" secondAttribute="bottom" id="MRI-Hg-7b3"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="ZdT-jR-GL6" secondAttribute="bottom" constant="187" id="SQz-xG-AaI">
+                            <constraint firstItem="AHx-64-g8v" firstAttribute="top" secondItem="wPy-bh-vlo" secondAttribute="bottom" id="bAV-dP-mJc"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="AHx-64-g8v" secondAttribute="bottom" constant="91" id="bDY-ex-Bp9">
                                 <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                             </constraint>
                             <constraint firstAttribute="trailingMargin" secondItem="wPy-bh-vlo" secondAttribute="trailing" constant="-16" id="ePO-kS-fkS"/>
                             <constraint firstItem="wPy-bh-vlo" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-16" id="ev4-Xi-TfG"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="AHx-64-g8v" secondAttribute="trailing" constant="-16" id="pgF-cx-XP4"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
-                                <exclude reference="ZdT-jR-GL6"/>
                                 <exclude reference="wPy-bh-vlo"/>
+                                <exclude reference="AHx-64-g8v"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="SQz-xG-AaI"/>
                                 <exclude reference="8im-Z8-ezS"/>
                                 <exclude reference="ePO-kS-fkS"/>
                                 <exclude reference="ev4-Xi-TfG"/>
-                                <exclude reference="AxM-m7-D6s"/>
-                                <exclude reference="H3d-Fc-KQ8"/>
-                                <exclude reference="MRI-Hg-7b3"/>
+                                <exclude reference="0rZ-ci-Rrh"/>
+                                <exclude reference="bAV-dP-mJc"/>
+                                <exclude reference="pgF-cx-XP4"/>
+                                <exclude reference="bDY-ex-Bp9"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="subviews">
-                                <include reference="ZdT-jR-GL6"/>
                                 <include reference="wPy-bh-vlo"/>
+                                <include reference="AHx-64-g8v"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="SQz-xG-AaI"/>
                                 <include reference="8im-Z8-ezS"/>
                                 <include reference="ePO-kS-fkS"/>
                                 <include reference="ev4-Xi-TfG"/>
-                                <include reference="AxM-m7-D6s"/>
-                                <include reference="H3d-Fc-KQ8"/>
-                                <include reference="MRI-Hg-7b3"/>
+                                <include reference="0rZ-ci-Rrh"/>
+                                <include reference="bAV-dP-mJc"/>
+                                <include reference="pgF-cx-XP4"/>
+                                <include reference="bDY-ex-Bp9"/>
                             </mask>
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" id="LKQ-0X-zfz"/>
                     <connections>
-                        <outlet property="resultsTableView" destination="ZdT-jR-GL6" id="Qtb-FC-FeG"/>
+                        <outlet property="collectionView" destination="AHx-64-g8v" id="Wfy-z7-ASC"/>
                         <outlet property="searchBar" destination="wPy-bh-vlo" id="nMb-oY-GTg"/>
                     </connections>
                 </viewController>

@@ -11,9 +11,9 @@
 #import "SAArtistViewController.h"
 @class SAArtist;
 
-@interface SASearchViewController () <UISearchBarDelegate,  UITableViewDelegate, UITableViewDataSource>
+@interface SASearchViewController () <UISearchBarDelegate, UICollectionViewDelegate, UICollectionViewDataSource>
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
-@property (weak, nonatomic) IBOutlet UITableView *resultsTableView;
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (nonatomic) NSArray *resultsArray;
 @property (nonatomic) SARequestManager *requestManager;
 
@@ -29,8 +29,8 @@
     
     // Setting up delegates
     self.searchBar.delegate = self;
-    self.resultsTableView.delegate = self;
-    self.resultsTableView.dataSource = self;
+    self.collectionView.delegate = self;
+    self.collectionView.dataSource = self;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -50,7 +50,7 @@
 - (void)setResultsArray:(NSArray *)resultsArray {
     _resultsArray = resultsArray;
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self.resultsTableView reloadData];
+        [self.collectionView reloadData];
     });
 }
 
@@ -61,14 +61,20 @@
     return _requestManager;
 }
 
-#pragma mark - UITableViewDelegate
+#pragma mark - UICollectionViewDelegate
 
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return [self.resultsArray count];
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
+    NSDictionary *artistDictionary = [self.resultsArray objectAtIndex:indexPath.row];
+    cell.
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
