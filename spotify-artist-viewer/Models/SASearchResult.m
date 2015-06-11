@@ -10,12 +10,13 @@
 
 @implementation SASearchResult
 
-- (instancetype)initWithName:(NSString *)name searchResultType:(SearchResultType)resultType andIdentifier:(NSString *)identifier {
+- (instancetype)initWithName:(NSString *)name searchResultType:(SearchResultType)resultType identifier:(NSString *)identifier andImageUrl:(NSString *)imageUrl {
     self = [super init];
     if (self) {
         self.name = name;
         self.resultType = resultType;
         self.identifier = identifier;
+        self.imageUrl = imageUrl;
     }
     return self;
 }

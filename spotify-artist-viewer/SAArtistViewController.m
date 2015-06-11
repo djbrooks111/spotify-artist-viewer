@@ -12,6 +12,9 @@
 #import "SATrack.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
+#define IMAGE_BORDER_WIDTH 3.0f
+#define IMAGE_CORNER_RADIUS 10.0f
+
 @interface SAArtistViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *artistNameLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *artistImageView;
@@ -45,8 +48,10 @@
         [self.artistImageView sd_setImageWithURL:[NSURL URLWithString:track.imageUrl]];
         self.bioTextView.text = [NSString stringWithFormat:@"Artist: %@", track.artist];
     }
-    self.artistImageView.layer.cornerRadius = self.artistImageView.frame.size.width / 2.0;
-    self.artistImageView.layer.masksToBounds = YES;
+    self.artistImageView.layer.borderWidth = IMAGE_BORDER_WIDTH;
+    self.artistImageView.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.artistImageView.layer.cornerRadius = IMAGE_CORNER_RADIUS;
+    self.artistImageView.clipsToBounds = YES;
 }
 
 - (void)didReceiveMemoryWarning {

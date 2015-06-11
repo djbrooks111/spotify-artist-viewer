@@ -20,11 +20,12 @@ typedef NS_ENUM(NSInteger, SearchResultType) {
 @property (nonatomic) NSString *name;
 @property (nonatomic) SearchResultType resultType;
 @property (nonatomic) NSString *identifier;
+@property (nonatomic) NSString *imageUrl;
 
 // Optional data
 @property (nonatomic) NSArray *availableMarkets;
 @property (nonatomic) NSString *trackArtist;
 
-- (instancetype)initWithName:(NSString *)name searchResultType:(SearchResultType)resultType andIdentifier:(NSString *)identifier;
+- (instancetype)initWithName:(NSString *)name searchResultType:(SearchResultType)resultType identifier:(NSString *)identifier andImageUrl:(NSString *)imageUrl;
 
 @end

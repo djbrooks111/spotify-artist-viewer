@@ -10,7 +10,6 @@
 #import "SARequestManager.h"
 #import "SAArtistViewController.h"
 #import "SASearchResult.h"
-@class SAArtist;
 
 @interface SASearchViewController () <UISearchBarDelegate,  UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
@@ -32,6 +31,11 @@
     self.searchBar.delegate = self;
     self.resultsTableView.delegate = self;
     self.resultsTableView.dataSource = self;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.view.hidden = NO;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -62,7 +66,7 @@
     return _requestManager;
 }
 
-#pragma mark - UITableViewDelegate
+#pragma mark - UITableViewDataSource
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
@@ -97,20 +101,24 @@
     return cell;
 }
 
+#pragma mark - UITableViewDelegate
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self.requestManager getArtistInformationWithDictionary:[self.resultsArray objectAtIndex:indexPath.row] success:^(SAArtist *artist) {
-        [self artistPicked:artist];
+    [self.requestManager getItemInformationFromSearchResult:[self.resultsArray objectAtIndex:indexPath.row] success:^(id item) {
+        [self itemPicked:item];
     } failure:^(NSError *error) {
-        NSLog(@"Failed to fetch %@'s information: %@", [self.resultsArray objectAtIndex:indexPath.row], error);
+        NSLog(@"Failed to fetch information: %@", error);
     }];
 }
 
-- (void)artistPicked:(SAArtist *)artist {
+- (void)itemPicked:(id)item {
     dispatch_async(dispatch_get_main_queue(), ^{
         self.searchBar.text = @"";
         self.resultsArray = nil;
-        SAArtistViewController *vc = [[SAArtistViewController alloc] initWithItem:artist];
-        [self presentViewController:vc animated:YES completion:nil];
+        SAArtistViewController *vc = [[SAArtistViewController alloc] initWithItem:item];
+        [self presentViewController:vc animated:YES completion:^{
+            self.view.hidden = YES;
+        }];
     });
 }
 
@@ -118,9 +126,9 @@
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-    NSString *query = [NSString stringWithFormat:@"https://api.spotify.com/v1/search?q=%@*&type=artist,album,track&limit=10", [searchText stringByReplacingOccurrencesOfString:@" " withString:@"+"]];
+    NSString *query = [NSString stringWithFormat:@"https://api.spotify.com/v1/search?q=%@*&type=artist,album,track&limit=5", [searchText stringByReplacingOccurrencesOfString:@" " withString:@"+"]];
     [self.requestManager executeQuery:query success:^(NSArray *searchResults) {
-        NSLog(@"results set");
+        self.resultsArray = nil;
         self.resultsArray = searchResults;
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     } failure:^(NSError *error) {
