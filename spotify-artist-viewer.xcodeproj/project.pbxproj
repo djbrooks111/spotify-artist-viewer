@@ -18,6 +18,7 @@
 		525A7C621B28C055004B393D /* SASearchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 525A7C611B28C055004B393D /* SASearchResult.m */; };
 		525A7C681B28CE2D004B393D /* SAAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 525A7C671B28CE2D004B393D /* SAAlbum.m */; };
 		525A7C6B1B28D341004B393D /* SATrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 525A7C6A1B28D341004B393D /* SATrack.m */; };
+		529234001B2A060200B90D74 /* UIColor+SpotifyColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 529233FF1B2A060200B90D74 /* UIColor+SpotifyColors.m */; };
 		52F5B4201B275B22000D6F01 /* SAArtistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F5B41F1B275B22000D6F01 /* SAArtistViewController.m */; };
 		52F5B4231B275C17000D6F01 /* SASearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F5B4221B275C17000D6F01 /* SASearchViewController.m */; };
 		52F5B4251B27846A000D6F01 /* SAArtistView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52F5B4241B27846A000D6F01 /* SAArtistView.xib */; };
@@ -56,6 +57,8 @@
 		525A7C671B28CE2D004B393D /* SAAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SAAlbum.m; path = Models/SAAlbum.m; sourceTree = "<group>"; };
 		525A7C691B28D341004B393D /* SATrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SATrack.h; path = Models/SATrack.h; sourceTree = "<group>"; };
 		525A7C6A1B28D341004B393D /* SATrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SATrack.m; path = Models/SATrack.m; sourceTree = "<group>"; };
+		529233FE1B2A060200B90D74 /* UIColor+SpotifyColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+SpotifyColors.h"; path = "Categories/UIColor+SpotifyColors.h"; sourceTree = "<group>"; };
+		529233FF1B2A060200B90D74 /* UIColor+SpotifyColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+SpotifyColors.m"; path = "Categories/UIColor+SpotifyColors.m"; sourceTree = "<group>"; };
 		52F5B41E1B275B22000D6F01 /* SAArtistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAArtistViewController.h; sourceTree = "<group>"; };
 		52F5B41F1B275B22000D6F01 /* SAArtistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAArtistViewController.m; sourceTree = "<group>"; };
 		52F5B4211B275C17000D6F01 /* SASearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASearchViewController.h; sourceTree = "<group>"; };
@@ -117,18 +120,19 @@
 		2E7674291B26766200336867 /* spotify-artist-viewer */ = {
 			isa = PBXGroup;
 			children = (
+				529233FD1B2A05E200B90D74 /* Categories */,
 				2E7674501B2676CD00336867 /* Models */,
 				2E7674511B2676D400336867 /* Networking */,
 				2E76742E1B26766200336867 /* AppDelegate.h */,
 				2E76742F1B26766200336867 /* AppDelegate.m */,
 				52F5B41E1B275B22000D6F01 /* SAArtistViewController.h */,
 				52F5B41F1B275B22000D6F01 /* SAArtistViewController.m */,
-				52F5B4241B27846A000D6F01 /* SAArtistView.xib */,
 				52F5B4211B275C17000D6F01 /* SASearchViewController.h */,
 				52F5B4221B275C17000D6F01 /* SASearchViewController.m */,
 				2E7674341B26766200336867 /* Main.storyboard */,
-				2E7674371B26766200336867 /* Images.xcassets */,
+				52F5B4241B27846A000D6F01 /* SAArtistView.xib */,
 				2E7674391B26766200336867 /* LaunchScreen.xib */,
+				2E7674371B26766200336867 /* Images.xcassets */,
 				2E76742A1B26766200336867 /* Supporting Files */,
 			);
 			path = "spotify-artist-viewer";
@@ -182,6 +186,15 @@
 				2E7674561B26772600336867 /* SARequestManager.m */,
 			);
 			name = Networking;
+			sourceTree = "<group>";
+		};
+		529233FD1B2A05E200B90D74 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				529233FE1B2A060200B90D74 /* UIColor+SpotifyColors.h */,
+				529233FF1B2A060200B90D74 /* UIColor+SpotifyColors.m */,
+			);
+			name = Categories;
 			sourceTree = "<group>";
 		};
 		5775F6AB377766EFE37822D2 /* Frameworks */ = {
@@ -330,6 +343,7 @@
 			files = (
 				2E7674541B2676F400336867 /* SAArtist.m in Sources */,
 				525A7C681B28CE2D004B393D /* SAAlbum.m in Sources */,
+				529234001B2A060200B90D74 /* UIColor+SpotifyColors.m in Sources */,
 				52F5B4231B275C17000D6F01 /* SASearchViewController.m in Sources */,
 				52F5B4201B275B22000D6F01 /* SAArtistViewController.m in Sources */,
 				525A7C6B1B28D341004B393D /* SATrack.m in Sources */,

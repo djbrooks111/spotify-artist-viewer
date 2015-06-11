@@ -89,7 +89,7 @@
         NSString *name = [itemDictionary objectForKey:@"name"];
         NSString *imageUrl = [[[itemDictionary objectForKey:@"images"] firstObject] objectForKey:@"url"];
         SASearchResult *searchResult = [[SASearchResult alloc] initWithName:name searchResultType:SearchResultAlbum identifier:identifer andImageUrl:imageUrl];
-        searchResult.availableMarkets = [itemDictionary objectForKey:@"available_markets"];
+        searchResult.popularity = [itemDictionary objectForKey:@"popularity"];
         [returnArray addObject:searchResult];
     }
     return returnArray;
@@ -102,6 +102,7 @@
         NSString *name = [itemDictionary objectForKey:@"name"];
         NSString *imageUrl = [[[itemDictionary objectForKey:@"images"] firstObject] objectForKey:@"url"];
         SASearchResult *searchResult = [[SASearchResult alloc] initWithName:name searchResultType:SearchResultArtist identifier:identifer andImageUrl:imageUrl];
+        searchResult.popularity = [itemDictionary objectForKey:@"popularity"];
         [returnArray addObject:searchResult];
     }
     return returnArray;
@@ -115,6 +116,8 @@
         NSString *imageUrl = [[[[itemDictionary objectForKey:@"album"] objectForKey:@"images"] firstObject] objectForKey:@"url"];
         SASearchResult *searchResult = [[SASearchResult alloc] initWithName:name searchResultType:SearchResultTrack identifier:identifer andImageUrl:imageUrl];
         searchResult.trackArtist = [[[itemDictionary objectForKey:@"artists"] firstObject] objectForKey:@"name"];
+        NSInteger duration = [[itemDictionary objectForKey:@"duration_ms"] integerValue];
+        searchResult.duration = duration;
         [returnArray addObject:searchResult];
     }
     return returnArray;
@@ -125,35 +128,81 @@
 - (void)getItemInformationFromSearchResult:(SASearchResult *)searchResult success:(void (^)(id item))success failure:(void (^)(NSError *error))failure {
     switch (searchResult.resultType) {
         case SearchResultAlbum: {
-            SAAlbum *album = [[SAAlbum alloc] initWithName:searchResult.name imageUrl:searchResult.imageUrl andAvailableMarkets:searchResult.availableMarkets];
-            success(album);
+            [self getAlbumInformation:searchResult success:success];
             break;
         }
         case SearchResultArtist: {
-            // Need to get the artist's bio
-            NSURL *echonestUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://developer.echonest.com/api/v4/artist/biographies?api_key=%@&id=spotify:artist:%@", ECHONEST_API_KEY, searchResult.identifier]];
-            NSURLSessionDataTask *bioQuery = [[NSURLSession sharedSession] dataTaskWithURL:echonestUrl completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                NSDictionary *jsonDictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-                if (!error) {
-                    NSString *bioText = [[[[jsonDictionary objectForKey:@"response"] objectForKey:@"biographies"] objectAtIndex:1] objectForKey:@"text"];
-                    SAArtist *artist = [[SAArtist alloc] initWithName:searchResult.name imageUrl:searchResult.imageUrl andBio:bioText];
-                    success(artist);
-                } else {
-                    NSLog(@"Error getting bio text");
-                }
-            }];
-            [bioQuery resume];
+            [self getArtistInformation:searchResult success:success];
             break;
         }
         case SearchResultTrack: {
-            SATrack *track = [[SATrack alloc] initWithName:searchResult.name imageUrl:searchResult.imageUrl andArtist:searchResult.trackArtist];
-            success(track);
+            [self getTrackInformation:searchResult success:success];
             break;
         }
         default: {
             break;
         }
     }
+}
+
+- (void)getAlbumInformation:(SASearchResult *)searchResult success:(void (^)(id))success {
+    NSURL *tracksUrl = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.spotify.com/v1/albums/%@/tracks", searchResult.identifier]];
+    NSURLSessionDataTask *tracksQuery = [[NSURLSession sharedSession] dataTaskWithURL:tracksUrl completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        NSDictionary *jsonDictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+        if (!error) {
+            NSMutableArray *tracks = [[NSMutableArray alloc] init];
+            NSDictionary *itemsDictionary = [jsonDictionary objectForKey:@"items"];
+            for (NSDictionary *item in itemsDictionary) {
+                [tracks addObject:[item objectForKey:@"name"]];
+            }
+            [self getAlbumPopularity:searchResult success:success tracks:tracks];
+        } else {
+            NSLog(@"Error getting tracks");
+        }
+    }];
+    [tracksQuery resume];
+}
+
+- (void)getAlbumPopularity:(SASearchResult *)searchResult success:(void (^)(id))success tracks:(NSMutableArray *)tracks {
+    NSURL *albumUrl = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.spotify.com/v1/albums/%@", searchResult.identifier]];
+    NSURLSessionDataTask *albumQuery = [[NSURLSession sharedSession] dataTaskWithURL:albumUrl completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        NSDictionary *jsonDictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+        if (!error) {
+            NSString *popularity = [jsonDictionary objectForKey:@"popularity"];
+            SAAlbum *album = [[SAAlbum alloc] initWithName:searchResult.name imageUrl:searchResult.imageUrl andTracks:[tracks copy]];
+            album.identifier = searchResult.identifier;
+            album.popularity = popularity;
+            success(album);
+        } else {
+            NSLog(@"Error getting album popularity");
+        }
+    }];
+    [albumQuery resume];
+}
+
+- (void)getArtistInformation:(SASearchResult *)searchResult success:(void (^)(id))success {
+    // Need to get the artist's bio
+    NSURL *echonestUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://developer.echonest.com/api/v4/artist/biographies?api_key=%@&id=spotify:artist:%@", ECHONEST_API_KEY, searchResult.identifier]];
+    NSURLSessionDataTask *bioQuery = [[NSURLSession sharedSession] dataTaskWithURL:echonestUrl completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        NSDictionary *jsonDictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+        if (!error) {
+            NSString *bioText = [[[[jsonDictionary objectForKey:@"response"] objectForKey:@"biographies"] objectAtIndex:1] objectForKey:@"text"];
+            SAArtist *artist = [[SAArtist alloc] initWithName:searchResult.name imageUrl:searchResult.imageUrl andBio:bioText];
+            artist.identifier = searchResult.identifier;
+            artist.popularity = searchResult.popularity;
+            success(artist);
+        } else {
+            NSLog(@"Error getting bio text");
+        }
+    }];
+    [bioQuery resume];
+}
+
+- (void)getTrackInformation:(SASearchResult *)searchResult success:(void (^)(id))success {
+    SATrack *track = [[SATrack alloc] initWithName:searchResult.name imageUrl:searchResult.imageUrl andArtist:searchResult.trackArtist];
+    track.identifier = searchResult.identifier;
+    track.duration = searchResult.duration;
+    success(track);
 }
 
 @end

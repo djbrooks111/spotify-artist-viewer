@@ -23,8 +23,9 @@ typedef NS_ENUM(NSInteger, SearchResultType) {
 @property (nonatomic) NSString *imageUrl;
 
 // Optional data
-@property (nonatomic) NSArray *availableMarkets;
 @property (nonatomic) NSString *trackArtist;
+@property (nonatomic) NSString *popularity;
+@property (nonatomic) NSInteger duration;
 
 - (instancetype)initWithName:(NSString *)name searchResultType:(SearchResultType)resultType identifier:(NSString *)identifier andImageUrl:(NSString *)imageUrl;
 

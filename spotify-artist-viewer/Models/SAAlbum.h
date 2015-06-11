@@ -12,8 +12,11 @@
 
 @property (nonatomic) NSString *name;
 @property (nonatomic) NSString *imageUrl;
-@property (nonatomic) NSArray *availableMarkets;
+@property (nonatomic) NSArray *tracks;
+@property (nonatomic) NSString *identifier;
+@property (nonatomic) NSString *popularity;
 
-- (instancetype)initWithName:(NSString *)name imageUrl:(NSString *)imageUrl andAvailableMarkets:(NSArray *)availableMarkets;
+
+- (instancetype)initWithName:(NSString *)name imageUrl:(NSString *)imageUrl andTracks:(NSArray *)tracks;
 
 @end

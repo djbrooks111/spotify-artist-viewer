@@ -10,12 +10,12 @@
 
 @implementation SAAlbum
 
-- (instancetype)initWithName:(NSString *)name imageUrl:(NSString *)imageUrl andAvailableMarkets:(NSArray *)availableMarkets {
+- (instancetype)initWithName:(NSString *)name imageUrl:(NSString *)imageUrl andTracks:(NSArray *)tracks {
     self = [super init];
     if (self) {
         self.name = name;
         self.imageUrl = imageUrl;
-        self.availableMarkets = availableMarkets;
+        self.tracks = tracks;
     }
     return self;
 }

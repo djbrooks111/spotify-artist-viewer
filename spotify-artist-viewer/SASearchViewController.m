@@ -10,6 +10,9 @@
 #import "SARequestManager.h"
 #import "SAArtistViewController.h"
 #import "SASearchResult.h"
+#import "UIColor+SpotifyColors.h"
+
+#define SEARCH_LIMIT 7
 
 @interface SASearchViewController () <UISearchBarDelegate,  UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
@@ -31,6 +34,9 @@
     self.searchBar.delegate = self;
     self.resultsTableView.delegate = self;
     self.resultsTableView.dataSource = self;
+    
+    // Initially hiding the table view for a cleaner look
+    self.resultsTableView.hidden = YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -77,7 +83,9 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    self.resultsTableView.hidden = NO;
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
+    cell.tintColor = [UIColor oliveColor];
     SASearchResult *searchResult = [self.resultsArray objectAtIndex:indexPath.row];
     cell.textLabel.text = searchResult.name;
     switch (searchResult.resultType) {
@@ -115,6 +123,7 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         self.searchBar.text = @"";
         self.resultsArray = nil;
+        self.resultsTableView.hidden = YES;
         SAArtistViewController *vc = [[SAArtistViewController alloc] initWithItem:item];
         [self presentViewController:vc animated:YES completion:^{
             self.view.hidden = YES;
@@ -126,7 +135,7 @@
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-    NSString *query = [NSString stringWithFormat:@"https://api.spotify.com/v1/search?q=%@*&type=artist,album,track&limit=5", [searchText stringByReplacingOccurrencesOfString:@" " withString:@"+"]];
+    NSString *query = [NSString stringWithFormat:@"https://api.spotify.com/v1/search?q=%@*&type=artist,album,track&limit=%d", [searchText stringByReplacingOccurrencesOfString:@" " withString:@"+"], SEARCH_LIMIT];
     [self.requestManager executeQuery:query success:^(NSArray *searchResults) {
         self.resultsArray = nil;
         self.resultsArray = searchResults;
