@@ -14,6 +14,8 @@
 
 - (void)executeQuery:(NSString *)query success:(void (^)(NSArray *searchResults))success failure:(void (^)(NSError *error))failure;
 
+- (void)executePagingQuery:(NSString *)query success:(void (^)(NSArray *searchResults))success failure:(void (^)(NSError *error))failure;
+
 - (void)getItemInformationFromSearchResult:(SASearchResult *)searchResult success:(void (^)(id item))success failure:(void (^)(NSError *error))failure;
 
 @end

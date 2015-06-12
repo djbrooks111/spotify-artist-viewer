@@ -12,12 +12,11 @@
 #import "SASearchResult.h"
 #import "UIColor+SpotifyColors.h"
 
-#define SEARCH_LIMIT 7
-
-@interface SASearchViewController () <UISearchBarDelegate,  UITableViewDelegate, UITableViewDataSource>
+@interface SASearchViewController () <UISearchBarDelegate,  UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UITableView *resultsTableView;
 @property (nonatomic) NSArray *resultsArray;
+@property (nonatomic) NSString *searchText;
 @property (nonatomic) SARequestManager *requestManager;
 
 @end
@@ -79,14 +78,14 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.resultsArray count];
+    return (NSInteger)[self.resultsArray count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     self.resultsTableView.hidden = NO;
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
     cell.tintColor = [UIColor oliveColor];
-    SASearchResult *searchResult = [self.resultsArray objectAtIndex:indexPath.row];
+    SASearchResult *searchResult = [self.resultsArray objectAtIndex:(NSUInteger)indexPath.row];
     cell.textLabel.text = searchResult.name;
     switch (searchResult.resultType) {
         case SearchResultAlbum: {
@@ -112,7 +111,7 @@
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self.requestManager getItemInformationFromSearchResult:[self.resultsArray objectAtIndex:indexPath.row] success:^(id item) {
+    [self.requestManager getItemInformationFromSearchResult:[self.resultsArray objectAtIndex:(NSUInteger)indexPath.row] success:^(id item) {
         [self itemPicked:item];
     } failure:^(NSError *error) {
         NSLog(@"Failed to fetch information: %@", error);
@@ -134,19 +133,47 @@
 #pragma mark - UISearchBarDelegate
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-    NSString *query = [NSString stringWithFormat:@"https://api.spotify.com/v1/search?q=%@*&type=artist,album,track&limit=%d", [searchText stringByReplacingOccurrencesOfString:@" " withString:@"+"], SEARCH_LIMIT];
-    [self.requestManager executeQuery:query success:^(NSArray *searchResults) {
+    if ([searchText isEqualToString:@""]) {
+        // Clear results array
+        self.resultsTableView.hidden = YES;
         self.resultsArray = nil;
-        self.resultsArray = searchResults;
-        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-    } failure:^(NSError *error) {
-        NSLog(@"Failed to execute %@: %@", query, error);
-    }];
+    } else {
+        self.resultsTableView.hidden = NO;
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+        NSString *query = [NSString stringWithFormat:@"https://api.spotify.com/v1/search?q=%@*&type=artist,album,track", [searchText stringByReplacingOccurrencesOfString:@" " withString:@"+"]];
+        self.searchText = searchText;
+        [self.requestManager executeQuery:query success:^(NSArray *searchResults) {
+            self.resultsArray = nil;
+            self.resultsArray = searchResults;
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        } failure:^(NSError *error) {
+            NSLog(@"Failed to execute %@: %@", query, error);
+        }];
+    }
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     [self.view resignFirstResponder];
+}
+
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    CGFloat scrollViewHeight = scrollView.frame.size.height;
+    CGFloat scrollContentSizeHeight = scrollView.contentSize.height;
+    CGFloat scrollOffset = scrollView.contentOffset.y;
+    
+    if (scrollOffset + scrollViewHeight == scrollContentSizeHeight) {
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+        // End of the tableView, load new data
+        NSString *query = [NSString stringWithFormat:@"https://api.spotify.com/v1/search?q=%@*&type=artist,album,track", [self.searchText stringByReplacingOccurrencesOfString:@" " withString:@"+"]];
+        [self.requestManager executePagingQuery:query success:^(NSArray *searchResults) {
+            self.resultsArray = [self.resultsArray arrayByAddingObjectsFromArray:searchResults];
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        } failure:^(NSError *error) {
+            NSLog(@"Failed to execute %@: %@", query, error);
+        }];
+    }
 }
 
 @end

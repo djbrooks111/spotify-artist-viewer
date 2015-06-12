@@ -11,7 +11,12 @@
 #import "SAArtist.h"
 #import "SATrack.h"
 
-#define ECHONEST_API_KEY @"6SMVCIMVWEQWVKFKW"
+static NSString * const EchonestAPIKey = @"6SMVCIMVWEQWVKFKW";
+static const NSInteger SearchLimit = 7;
+
+@interface SARequestManager ()
+@property (nonatomic) NSInteger *pagingOffset;
+@end
 
 @implementation SARequestManager
 
@@ -26,7 +31,7 @@
 
 - (id)init {
     if (self = [super init]) {
-        
+        self.pagingOffset = 0;
     }
     return self;
 }
@@ -34,7 +39,7 @@
 #pragma mark - Search Functionality
 
 - (void)executeQuery:(NSString *)query success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure {
-    NSURL *url = [NSURL URLWithString:query];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@&limit=%ld", query, (long)SearchLimit]];
     NSURLSessionDataTask *queryTask = [[NSURLSession sharedSession] dataTaskWithURL:url completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         if (data) {
             // Successful fetch
@@ -59,13 +64,13 @@
         NSArray *albums = [self extractAlbumsFromDictionary:[jsonDictionary objectForKey:@"albums"]];
         NSArray *artists = [self extractArtistsFromDictionary:[jsonDictionary objectForKey:@"artists"]];
         NSArray *tracks = [self extractTracksFromDictionary:[jsonDictionary objectForKey:@"tracks"]];
-        NSInteger maxCount = [tracks count];
+        NSUInteger maxCount = [tracks count];
         if ([albums count] > [artists count] && [albums count] > [tracks count]) {
             maxCount = [albums count];
         } else if ([artists count] > [albums count] && [artists count] > [tracks count]) {
             maxCount = [artists count];
         }
-        for (int i = 0; i < maxCount; i++) {
+        for (NSUInteger i = 0; i < maxCount; i++) {
             if (i < [albums count]) {
                 [returnArray addObject:[albums objectAtIndex:i]];
             }
@@ -121,6 +126,23 @@
         [returnArray addObject:searchResult];
     }
     return returnArray;
+}
+
+#pragma mark - Paging Method
+
+- (void)executePagingQuery:(NSString *)query success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure {
+    self.pagingOffset += SearchLimit;
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@&limit=%ld&offset=%ld", query, (long)SearchLimit, (long)self.pagingOffset]];
+    NSURLSessionDataTask *queryTask = [[NSURLSession sharedSession] dataTaskWithURL:url completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (data) {
+            // Successful fetch
+            if (success) {
+                // Safety net to not crash if !success
+                [self parseQueryResultsFromData:data withSuccess:success];
+            }
+        }
+    }];
+    [queryTask resume];
 }
 
 #pragma mark - Item Detail View
@@ -182,7 +204,7 @@
 
 - (void)getArtistInformation:(SASearchResult *)searchResult success:(void (^)(id))success {
     // Need to get the artist's bio
-    NSURL *echonestUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://developer.echonest.com/api/v4/artist/biographies?api_key=%@&id=spotify:artist:%@", ECHONEST_API_KEY, searchResult.identifier]];
+    NSURL *echonestUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://developer.echonest.com/api/v4/artist/biographies?api_key=%@&id=spotify:artist:%@", EchonestAPIKey, searchResult.identifier]];
     NSURLSessionDataTask *bioQuery = [[NSURLSession sharedSession] dataTaskWithURL:echonestUrl completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         NSDictionary *jsonDictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
         if (!error) {

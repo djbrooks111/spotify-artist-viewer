@@ -125,17 +125,17 @@
                                 <exclude reference="ZdT-jR-GL6"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="AxM-m7-D6s"/>
-                                <exclude reference="H3d-Fc-KQ8"/>
-                                <exclude reference="MRI-Hg-7b3"/>
+                                <exclude reference="SQz-xG-AaI"/>
+                                <exclude reference="WMH-IG-oZ9"/>
                                 <exclude reference="8im-Z8-ezS"/>
                                 <exclude reference="ePO-kS-fkS"/>
                                 <exclude reference="ev4-Xi-TfG"/>
                                 <exclude reference="1Uj-79-QFq"/>
                                 <exclude reference="2Qj-Us-5Ty"/>
                                 <exclude reference="Xc3-7R-rK0"/>
-                                <exclude reference="SQz-xG-AaI"/>
-                                <exclude reference="WMH-IG-oZ9"/>
+                                <exclude reference="AxM-m7-D6s"/>
+                                <exclude reference="H3d-Fc-KQ8"/>
+                                <exclude reference="MRI-Hg-7b3"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -145,17 +145,17 @@
                                 <include reference="ZdT-jR-GL6"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="AxM-m7-D6s"/>
-                                <include reference="H3d-Fc-KQ8"/>
-                                <include reference="MRI-Hg-7b3"/>
+                                <include reference="SQz-xG-AaI"/>
+                                <include reference="WMH-IG-oZ9"/>
                                 <include reference="8im-Z8-ezS"/>
                                 <include reference="ePO-kS-fkS"/>
                                 <include reference="ev4-Xi-TfG"/>
                                 <include reference="1Uj-79-QFq"/>
                                 <include reference="2Qj-Us-5Ty"/>
                                 <include reference="Xc3-7R-rK0"/>
-                                <include reference="SQz-xG-AaI"/>
-                                <include reference="WMH-IG-oZ9"/>
+                                <include reference="AxM-m7-D6s"/>
+                                <include reference="H3d-Fc-KQ8"/>
+                                <include reference="MRI-Hg-7b3"/>
                             </mask>
                         </variation>
                     </view>

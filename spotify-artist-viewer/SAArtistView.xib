@@ -225,24 +225,24 @@
                     <exclude reference="Ryo-dJ-MQX"/>
                 </mask>
                 <mask key="constraints">
-                    <exclude reference="Eai-vJ-cLW"/>
-                    <exclude reference="Spp-FD-uvv"/>
-                    <exclude reference="mJC-sa-pag"/>
+                    <exclude reference="2ax-j3-ncy"/>
+                    <exclude reference="TF2-RR-39e"/>
+                    <exclude reference="KnA-Pd-eew"/>
+                    <exclude reference="Vy2-8H-G0R"/>
+                    <exclude reference="4th-Ki-bge"/>
+                    <exclude reference="6gL-hh-O9r"/>
+                    <exclude reference="Q7e-2Y-nhY"/>
                     <exclude reference="K0b-td-cvo"/>
                     <exclude reference="oP4-GH-sRs"/>
                     <exclude reference="FrW-qI-YqQ"/>
                     <exclude reference="mKD-Qz-Y8Q"/>
-                    <exclude reference="KnA-Pd-eew"/>
-                    <exclude reference="Vy2-8H-G0R"/>
-                    <exclude reference="2ax-j3-ncy"/>
-                    <exclude reference="TF2-RR-39e"/>
-                    <exclude reference="4th-Ki-bge"/>
-                    <exclude reference="6gL-hh-O9r"/>
-                    <exclude reference="Q7e-2Y-nhY"/>
                     <exclude reference="0s9-XM-M5b"/>
                     <exclude reference="1fv-8j-7pu"/>
                     <exclude reference="BPv-gs-YhA"/>
                     <exclude reference="Jgr-2c-1U4"/>
+                    <exclude reference="Eai-vJ-cLW"/>
+                    <exclude reference="Spp-FD-uvv"/>
+                    <exclude reference="mJC-sa-pag"/>
                 </mask>
             </variation>
             <variation key="heightClass=regular-widthClass=compact">
@@ -256,24 +256,24 @@
                     <include reference="Ryo-dJ-MQX"/>
                 </mask>
                 <mask key="constraints">
-                    <include reference="Eai-vJ-cLW"/>
-                    <include reference="Spp-FD-uvv"/>
-                    <include reference="mJC-sa-pag"/>
+                    <include reference="2ax-j3-ncy"/>
+                    <include reference="TF2-RR-39e"/>
+                    <include reference="KnA-Pd-eew"/>
+                    <include reference="Vy2-8H-G0R"/>
+                    <include reference="4th-Ki-bge"/>
+                    <include reference="6gL-hh-O9r"/>
+                    <include reference="Q7e-2Y-nhY"/>
                     <include reference="K0b-td-cvo"/>
                     <include reference="oP4-GH-sRs"/>
                     <include reference="FrW-qI-YqQ"/>
                     <include reference="mKD-Qz-Y8Q"/>
-                    <include reference="KnA-Pd-eew"/>
-                    <include reference="Vy2-8H-G0R"/>
-                    <include reference="2ax-j3-ncy"/>
-                    <include reference="TF2-RR-39e"/>
-                    <include reference="4th-Ki-bge"/>
-                    <include reference="6gL-hh-O9r"/>
-                    <include reference="Q7e-2Y-nhY"/>
                     <include reference="0s9-XM-M5b"/>
                     <include reference="1fv-8j-7pu"/>
                     <include reference="BPv-gs-YhA"/>
                     <include reference="Jgr-2c-1U4"/>
+                    <include reference="Eai-vJ-cLW"/>
+                    <include reference="Spp-FD-uvv"/>
+                    <include reference="mJC-sa-pag"/>
                 </mask>
             </variation>
             <point key="canvasLocation" x="410" y="436"/>

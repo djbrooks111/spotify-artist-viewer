@@ -13,11 +13,11 @@
 #import "UIColor+SpotifyColors.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
-#define IMAGE_BORDER_WIDTH 3.0f
-#define IMAGE_CORNER_RADIUS 10.0f
-#define BUTTON_BORDER_WIDTH 2.0f
-#define MILISECONDS_TO_SECONDS 1000.0
-#define SECONDS_TO_MINUTES 60.0
+static const CGFloat ImageBorderWidth = 3.0f;
+static const CGFloat ImageCornerRadius = 10.0f;
+static const CGFloat ButtonBorderWidth = 2.0f;
+static const CGFloat MillisecondsToSeconds = 1000.0;
+static const CGFloat SecondsToMinutes = 60.0f;
 
 @interface SAArtistViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *artistNameLabel;
@@ -81,25 +81,25 @@
     [self.artistImageView sd_setImageWithURL:[NSURL URLWithString:track.imageUrl]];
     self.bioTextView.text = [NSString stringWithFormat:@"Artist: %@", track.artist];
     self.urlSchema = [NSString stringWithFormat:@"spotify://http://open.spotify.com/track/%@", track.identifier];
-    float seconds = ceil(track.duration / MILISECONDS_TO_SECONDS);
-    int minutes = (seconds / SECONDS_TO_MINUTES) / 1;
-    int remainingSeconds = (seconds - (minutes * 60)) / 1;
+    double seconds = ceil(track.duration / MillisecondsToSeconds);
+    int minutes = (int)(seconds / SecondsToMinutes);
+    int remainingSeconds = (int)(seconds - (minutes * 60));
     self.extraInfoLabel.text = [NSString stringWithFormat:@"Time: %d:%d", minutes, remainingSeconds];
 }
 
 #pragma mark - User Interface
 
 - (void)roundAndBorderUserInterfaceItems {
-    self.artistImageView.layer.borderWidth = IMAGE_BORDER_WIDTH;
+    self.artistImageView.layer.borderWidth = ImageBorderWidth;
     self.artistImageView.layer.borderColor = [UIColor whiteColor].CGColor;
-    self.artistImageView.layer.cornerRadius = IMAGE_CORNER_RADIUS;
+    self.artistImageView.layer.cornerRadius = ImageCornerRadius;
     self.artistImageView.clipsToBounds = YES;
     
-    self.backButton.layer.borderWidth = BUTTON_BORDER_WIDTH;
+    self.backButton.layer.borderWidth = ButtonBorderWidth;
     self.backButton.layer.borderColor = [UIColor whiteColor].CGColor;
     self.backButton.layer.cornerRadius = self.backButton.frame.size.height / 2;
     self.backButton.clipsToBounds = YES;
-    self.openInSpotifyButton.layer.borderWidth = BUTTON_BORDER_WIDTH;
+    self.openInSpotifyButton.layer.borderWidth = ButtonBorderWidth;
     self.openInSpotifyButton.layer.borderColor = [UIColor whiteColor].CGColor;
     self.openInSpotifyButton.layer.cornerRadius = self.openInSpotifyButton.frame.size.height / 2;
     self.openInSpotifyButton.clipsToBounds = YES;
