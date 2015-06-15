@@ -82,7 +82,6 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    self.resultsTableView.hidden = NO;
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
     cell.tintColor = [UIColor oliveColor];
     SASearchResult *searchResult = [self.resultsArray objectAtIndex:(NSUInteger)indexPath.row];
@@ -122,9 +121,9 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         self.searchBar.text = @"";
         self.resultsArray = nil;
-        self.resultsTableView.hidden = YES;
         SAArtistViewController *vc = [[SAArtistViewController alloc] initWithItem:item];
         [self presentViewController:vc animated:YES completion:^{
+            self.resultsTableView.hidden = YES;
             self.view.hidden = YES;
         }];
     });
@@ -138,13 +137,13 @@
         self.resultsTableView.hidden = YES;
         self.resultsArray = nil;
     } else {
-        self.resultsTableView.hidden = NO;
         [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
         NSString *query = [NSString stringWithFormat:@"https://api.spotify.com/v1/search?q=%@*&type=artist,album,track", [searchText stringByReplacingOccurrencesOfString:@" " withString:@"+"]];
         self.searchText = searchText;
         [self.requestManager executeQuery:query success:^(NSArray *searchResults) {
             self.resultsArray = nil;
             self.resultsArray = searchResults;
+            self.resultsTableView.hidden = NO;
             [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         } failure:^(NSError *error) {
             NSLog(@"Failed to execute %@: %@", query, error);
